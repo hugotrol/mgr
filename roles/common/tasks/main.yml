@@ -35,7 +35,6 @@
 
 - name: install git
   become: true
-  Yum:
-name: git
- state: present
+  yum: name=git
+  state: present
   tags: [common]
