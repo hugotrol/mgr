@@ -1,0 +1,41 @@
+- name: Clean yum
+  become: true
+  shell: yum clean all
+  tags: [common]
+
+- name: upgrade all packages
+  become: true
+  yum: name=* state=latest
+  tags: [common]
+
+- name: Disable selinux
+  selinux: state=disabled
+  become: true
+  tags: [common]
+
+- name: install unzip
+  become: true
+  yum: name=unzip
+  tags: [common]
+
+- name: Enable the EPEL repository definitions.
+  become: true
+  yum: pkg=epel-release
+  tags: [common]
+
+- name: Install python setup tools
+  become: true
+  yum: name=python-setuptools
+  tags: [common]
+
+- name: Install Pypi
+  become: true
+  easy_install: name=pip
+  tags: [common]
+
+- name: install git
+  become: true
+  Yum:
+name: git
+ state: present
+  tags: [common]

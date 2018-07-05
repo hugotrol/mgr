@@ -1,0 +1,41 @@
+---
+- name: Install docker-py
+  become: true
+  pip:
+ name: docker-py
+ extra_args: --ignore-installed
+  tags: [docker]
+
+- name: Update docker repo
+  become: true
+  lineinfile:
+ dest: /etc/yum.repos.d/docker.repo
+ create: yes
+ line: "{{ item }}"
+  with_items:
+ - "[dockerrepo]"
+ - "name=Docker Repository"
+ - "baseurl=https://yum.dockerproject.org/repo/main/centos/7/"
+ - "enabled=1"
+ - "gpgcheck=1"
+ - "gpgkey=https://yum.dockerproject.org/gpg"
+  tags: [docker]
+
+- name: Install Docker
+  become: true
+  yum: pkg=docker-engine state=present
+  tags: [docker]
+
+- name: enable sysv dockerd service
+  become: true
+  service:
+ name: docker.service
+ enabled: yes
+  tags: [docker]
+
+- name: Start service
+  become: true
+  service:
+ name: docker.service
+ state: started
+  tags: [docker]
