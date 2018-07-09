@@ -1,0 +1,17 @@
+---
+- name: Install common packages
+  hosts: kubernetes
+  roles:
+  - common
+  - docker
+  - kubecommon
+
+- name: Configure Manager
+  hosts: kubernetes-master
+  roles:
+  - kubemaster
+
+- name: Configure Workers
+  hosts: kubernetes-slave
+  roles:
+  - kubeslave
