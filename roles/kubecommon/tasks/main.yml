@@ -1,0 +1,37 @@
+---
+- name: Update kube repo
+  become: true
+  lineinfile:
+    path: /etc/yum.repos.d/kubernetes.repo
+    create: yes
+    line: '{{ item }}'
+  loop:
+    - '[kubernetes]'
+    - 'name=Kubernetes'
+    - 'baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64'
+    - 'enabled=1'
+    - 'gpgcheck=1'
+    - 'repo_gpgcheck=1'
+    - 'gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg'
+  tags: [kubemaster]
+- name: Install Kube packagers
+  become: true
+  yum:
+    name: {{ packages }}
+  vars:
+    packages:
+    - kubelet
+    - kubeadm
+    - kubectl
+- name: Disable SELinux
+  become: true
+  selinux:
+    state: disabled
+- name: Disable firewalld
+  become: true
+  service:
+    name: firewalld
+    state: stopped
+- name: Generate Token
+  shell: 'kubeadm token generate'
+  register: kubetoken
