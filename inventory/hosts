@@ -1,10 +1,9 @@
-[managers]
-manager1=137.135.112.26 ansible_connection=ssh ansible_user=hkuna ansible_ssh_private_key_file=/Users/marcel/key
-
-
 # Hosts
 manager ansible_host=137.135.112.26 ansible_ssh_user=hkuna ansible_ssh_private_key_file=/Users/marcel/key
 worker1 ansible_host=137.117.81.155 ansible_ssh_user=hkuna ansible_ssh_private_key_file=/Users/marcel/key
+kubemaster ansible_host=137.135.126.114 ansible_ssh_user=hkuna ansible_ssh_private_key_file=/Users/marcel/key
+kubeslave ansible_host=137.117.89.195 ansible_ssh_user=hkuna ansible_ssh_private_key_file=/Users/marcel/key
+
 [swarm-managers]
 manager
 
@@ -14,3 +13,13 @@ worker1
 [swarm:children]
 swarm-managers
 swarm-workers
+
+[kubernetes-master]
+kubemaster
+
+[kubernetes-slave]
+kubeslave
+
+[kubernetes:children]
+kubernetes-master
+kubernetes-slave

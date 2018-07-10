@@ -17,7 +17,7 @@
 - name: Install Kube packagers
   become: true
   yum:
-    name: {{ packages }}
+    name: "{{ packages }}"
   vars:
     packages:
     - kubelet
@@ -32,6 +32,3 @@
   service:
     name: firewalld
     state: stopped
-- name: Generate Token
-  shell: 'kubeadm token generate'
-  register: kubetoken
