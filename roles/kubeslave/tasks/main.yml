@@ -1,4 +1,4 @@
 ---
 
 - name: kubeadm join with pre generated token
-  command: kubeadm join --token {{ kubetoken }} 137.117.89.195:6443
+  command: 'kubeadm join --token {{ kubetoken }} 137.117.89.195:6443 --discovery-token-unsafe-skip-ca-verification'
