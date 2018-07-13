@@ -32,8 +32,13 @@
   service:
     name: firewalld
     state: stopped
-- name: enable
+- name: start kubelet
   become: true
   service:
     name: kubelet
     state: started
+- name: enable kubelet
+  become: true
+  service:
+    name: kubelet
+    enabled: yes
