@@ -8,10 +8,6 @@
     minutes: 4
     prompt: "Waiting..."
 
-- name: FlannelNetwork
-  become: true
-  command: 'sysctl net.bridge.bridge-nf-call-iptables=1'
-
 - name: FlannelNetworkYaml
   become: true
   command: 'kubectl --kubeconfig /etc/kubernetes/admin.conf apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml'
