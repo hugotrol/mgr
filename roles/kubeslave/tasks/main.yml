@@ -1,4 +1,29 @@
 ---
 
+
+- name: enable sysv dockerd service
+  become: true
+  service:
+    name: docker.service
+    enabled: yes
+  tags: [docker]
+
+- name: Start service
+  become: true
+  service:
+    name: docker.service
+    state: started
+  tags: [docker]
+
+- name: Disable SELinux
+  become: true
+  selinux:
+    state: disabled
+- name: Disable firewalld
+  become: true
+  service:
+    name: firewalld
+    state: stopped
+    
 - name: kubeadm join with pre generated token
   command: 'kubeadm join --token {{ kubetoken }} 137.117.89.195:6443 --discovery-token-unsafe-skip-ca-verification'
