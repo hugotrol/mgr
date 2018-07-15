@@ -3,6 +3,11 @@
   shell: yum clean all
   tags: [common]
 
+- name: remove old docker-engine
+  yum:
+    name: docker-engine
+    state: absent
+
 - name: upgrade all packages
   become: true
   yum: name=* state=latest
