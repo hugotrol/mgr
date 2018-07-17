@@ -4,6 +4,7 @@
   tags: [common]
 
 - name: remove old docker-engine
+  become: true
   yum:
     name: docker-engine
     state: absent

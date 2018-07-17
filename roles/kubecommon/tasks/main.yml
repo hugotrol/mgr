@@ -32,6 +32,7 @@
   service:
     name: firewalld
     state: stopped
+  ignore_errors: yes
 - name: iptables
   become: true
   command: 'sysctl net.bridge.bridge-nf-call-iptables=1'
