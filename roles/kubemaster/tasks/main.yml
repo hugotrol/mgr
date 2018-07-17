@@ -13,9 +13,9 @@
   command: 'kubectl --kubeconfig /etc/kubernetes/admin.conf apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml'
 
 - name: Wait for Initiate
-    pause:
-      minutes: 1
-      prompt: "Waiting..."
+  pause:
+    minutes: 1
+    prompt: "Waiting..."
 
 - name: RunAsRoot
   become: true
