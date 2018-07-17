@@ -1,4 +1,5 @@
 ---
 
 - name: kubeadm join with pre generated token
-  command: 'kubeadm join --token {{ kubetoken }} 172.31.22.124:6443 --discovery-token-unsafe-skip-ca-verification'
+  become: true
+  command: 'kubeadm join --token {{ kubetoken }} 18.233.96.130:6443 --discovery-token-unsafe-skip-ca-verification'
